@@ -52,20 +52,35 @@
     #login-screen {
       padding: 50px;
     }
-    #login-screen input {
+    #login-screen input, .settings-form input {
       padding: 10px;
       font-size: 16px;
       width: 80%;
       max-width: 300px;
-    }
-    #login-screen button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #007bff;
-      color: white;
-      border: none;
+      margin-bottom: 10px;
       border-radius: 5px;
-      cursor: pointer;
+      border: 1px solid #ccc;
+    }
+    .settings-form select {
+      padding: 10px;
+      font-size: 16px;
+      width: 80%;
+      max-width: 300px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    li {
+      background-color: white;
+      color: black;
+      margin: 5px auto;
+      padding: 10px;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 5px;
     }
   </style>
 </head>
@@ -78,7 +93,6 @@
     <p id="login-error" style="color: red; display: none;">Invalid credentials. Try again.</p>
   </div>
 
-  
   <div class="container">
     <h1>SafeMe Emergency Safety App</h1>
 
@@ -90,19 +104,21 @@
       <button onclick="showScreen('contactForm')">Contact Form</button>
     </div>
 
-    
     <div id="home" class="screen active">
       <button id="safe-button" onclick="sendAlert()">Safe Me</button>
       <div id="map"></div>
     </div>
 
-    
     <div id="contacts" class="screen">
       <h2>Contacts</h2>
-      <p>+ Add/Edit/Delete emergency contacts here.</p>
+      <form onsubmit="addContact(event)">
+        <input type="text" id="contact-name" placeholder="Contact Name" required /><br />
+        <input type="text" id="contact-phone" placeholder="Phone Number" required /><br />
+        <button type="submit">Add Contact</button>
+      </form>
+      <ul id="contact-list"></ul>
     </div>
 
-    
     <div id="history" class="screen">
       <h2>Alert History</h2>
       <ul id="alert-log"></ul>
@@ -111,10 +127,19 @@
     
     <div id="settings" class="screen">
       <h2>Settings</h2>
-      <p>Update profile, notification settings, and more.</p>
+      <form class="settings-form" onsubmit="updateSettings(event)">
+        <input type="text" id="user-name" placeholder="Your Name" /><br />
+        <input type="text" id="user-phone" placeholder="Phone Number" /><br />
+        <label for="notifications">Notifications:</label><br />
+        <select id="notifications">
+          <option value="on">On</option>
+          <option value="off">Off</option>
+        </select><br />
+        <button type="submit">Save Settings</button>
+      </form>
+      <div id="settings-summary"></div>
     </div>
 
-    
     <div id="contactForm" class="screen">
       <h2>Contact Us</h2>
       <form>
@@ -183,6 +208,30 @@
       }, () => {
         alert("Could not access location. Alert not sent.");
       });
+    }
+
+    function addContact(event) {
+      event.preventDefault();
+      const name = document.getElementById("contact-name").value;
+      const phone = document.getElementById("contact-phone").value;
+      const contactList = document.getElementById("contact-list");
+
+      const contactItem = document.createElement("li");
+      contactItem.textContent = `${name} - ${phone}`;
+      contactList.appendChild(contactItem);
+
+      document.getElementById("contact-name").value = "";
+      document.getElementById("contact-phone").value = "";
+    }
+
+    function updateSettings(event) {
+      event.preventDefault();
+      const name = document.getElementById("user-name").value;
+      const phone = document.getElementById("user-phone").value;
+      const notifications = document.getElementById("notifications").value;
+
+      const summary = `✅ Settings saved: ${name ? `Name: ${name}, ` : ""}${phone ? `Phone: ${phone}, ` : ""}Notifications: ${notifications}`;
+      document.getElementById("settings-summary").textContent = summary;
     }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxuxZk_macRUgpXSwjApDZdM2HXMMjYi4&callback=initMap" async defer></script>
