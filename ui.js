@@ -70,7 +70,6 @@
   </style>
 </head>
 <body>
-  
   <div id="login-screen">
     <h2>Login to SafeMe</h2>
     <input type="text" id="username" placeholder="Username" /><br /><br />
@@ -93,7 +92,7 @@
 
     
     <div id="home" class="screen active">
-      <button id="safe-button">Safe Me</button>
+      <button id="safe-button" onclick="sendAlert()">Safe Me</button>
       <div id="map"></div>
     </div>
 
@@ -106,7 +105,7 @@
     
     <div id="history" class="screen">
       <h2>Alert History</h2>
-      <p>List of past alerts will appear here.</p>
+      <ul id="alert-log"></ul>
     </div>
 
     
@@ -166,6 +165,24 @@
       } else {
         errorMsg.style.display = "block";
       }
+    }
+
+    function sendAlert() {
+      navigator.geolocation.getCurrentPosition(position => {
+        const lat = position.coords.latitude.toFixed(5);
+        const lng = position.coords.longitude.toFixed(5);
+        const timestamp = new Date().toLocaleString();
+        const message = `🚨 Alert sent at ${timestamp} (Lat: ${lat}, Lng: ${lng})`;
+
+        alert("🚨 Emergency alert has been sent to authorities.");
+        console.log(message);
+
+        const logItem = document.createElement("li");
+        logItem.textContent = message;
+        document.getElementById("alert-log").appendChild(logItem);
+      }, () => {
+        alert("Could not access location. Alert not sent.");
+      });
     }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxuxZk_macRUgpXSwjApDZdM2HXMMjYi4&callback=initMap" async defer></script>
