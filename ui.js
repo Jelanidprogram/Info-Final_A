@@ -14,6 +14,7 @@
     }
     .container {
       padding: 20px;
+      display: none;
     }
     #safe-button {
       background-color: #73d483;
@@ -48,9 +49,37 @@
     .active {
       display: block;
     }
+    #login-screen {
+      padding: 50px;
+    }
+    #login-screen input {
+      padding: 10px;
+      font-size: 16px;
+      width: 80%;
+      max-width: 300px;
+    }
+    #login-screen button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
+  
+  <div id="login-screen">
+    <h2>Login to SafeMe</h2>
+    <input type="text" id="username" placeholder="Username" /><br /><br />
+    <input type="password" id="password" placeholder="Password" /><br /><br />
+    <button onclick="login()">Login</button>
+    <p id="login-error" style="color: red; display: none;">Invalid credentials. Try again.</p>
+  </div>
+
+  
   <div class="container">
     <h1>SafeMe Emergency Safety App</h1>
 
@@ -70,7 +99,7 @@
 
     
     <div id="contacts" class="screen">
-      <h2>Emergency Contacts</h2>
+      <h2>Contacts</h2>
       <p>+ Add/Edit/Delete emergency contacts here.</p>
     </div>
 
@@ -125,8 +154,20 @@
         alert("Geolocation failed. Please enable location access.");
       });
     }
+
+    function login() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const errorMsg = document.getElementById("login-error");
+
+      if (username === "bob" && password === "bobpass") {
+        document.getElementById("login-screen").style.display = "none";
+        document.querySelector(".container").style.display = "block";
+      } else {
+        errorMsg.style.display = "block";
+      }
+    }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxuxZk_macRUgpXSwjApDZdM2HXMMjYi4&callback=initMap" async defer></script>
 </body>
 </html>
-
