@@ -70,7 +70,7 @@
   </style>
 </head>
 <body>
-  <img src="https://cdn.drop.media/guest/ce9f311e-db07-420e-8def-784adc9df009.jpeg" alt="SafeMe Logo" style="width: 100%; height: auto;" </img>
+  <img src="https://cdn.drop.media/guest/ce9f311e-db07-420e-8def-784adc9df009.jpeg" alt="SafeMe Logo" style="width: 100%; height: auto;" <img/>
   
   <div id="login-screen">
     <h2>Login to SafeMe</h2>
