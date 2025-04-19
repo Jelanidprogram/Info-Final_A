@@ -82,7 +82,7 @@
 
   
   <div class="container">
-    <h1>SafeMe Emergency Safety App</h1>
+    <h1>Emergency Safety App</h1>
 
     <div class="menu">
       <button onclick="showScreen('home')">Home</button>
