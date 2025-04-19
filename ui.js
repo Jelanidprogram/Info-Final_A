@@ -170,5 +170,6 @@
     }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxuxZk_macRUgpXSwjApDZdM2HXMMjYi4&callback=initMap" async defer></script>
-</body>
+   const apiKey = process.env.apiKey;
+  </body>
 </html>
