@@ -164,11 +164,23 @@
       if (username === "bob" && password === "bobpass") {
         document.getElementById("login-screen").style.display = "none";
         document.querySelector(".container").style.display = "block";
+        loadGoogleMaps();
       } else {
         errorMsg.style.display = "block";
       }
     }
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
-  </body>
+    function loadGoogleMaps() {
+      // This will be loaded from your environment/config
+      const script = document.createElement('script');
+      script.src = '/api/maps-key'; // This endpoint will provide the key securely
+      script.onload = () => {
+        const mapsScript = document.createElement('script');
+        mapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${window.googleMapsKey}&callback=initMap`;
+        document.body.appendChild(mapsScript);
+      };
+      document.body.appendChild(script);
+    }
+  </script>
+</body>
 </html>
