@@ -226,19 +226,21 @@
       document.getElementById("settings-summary").textContent = summary;
     }
   </script>
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxuxZk_macRUgpXSwjApDZdM2HXMMjYi4&callback=initMap" async defer></script>
-  </body>
-    function loadGoogleMaps() {
-      // This will be loaded from your environment/config
-      const script = document.createElement('script');
-      script.src = '/api/maps-key'; // This endpoint will provide the key securely
-      script.onload = () => {
-        const mapsScript = document.createElement('script');
-        mapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${window.googleMapsKey}&callback=initMap`;
-        document.body.appendChild(mapsScript);
-      };
-      document.body.appendChild(script);
-    }
+ <script
+ <script type="module">
+  import { GOOGLE_MAPS_API_KEY } from './config.js';
+  
+  function loadGoogleMaps() {
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&callback=initMap`;
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+  }
+  
+  // Call this when needed (like after login)
+  window.loadGoogleMaps = loadGoogleMaps;
+</script>
   </script>
 </body>
 </main>

@@ -1,1 +1,13 @@
+# API keys and sensitive data
+config.js
+.env
+.env.local
+.env*.local
+secrets/
+api-keys.json
 
+# Node modules
+node_modules/
+
+# System files
+.DS_Store
