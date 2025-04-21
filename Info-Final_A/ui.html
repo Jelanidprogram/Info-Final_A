@@ -70,7 +70,7 @@
   </style>
 </head>
 <body>
-  <img src="https://cdn.drop.media/guest/ce9f311e-db07-420e-8def-784adc9df009.jpeg" alt="SafeMe Logo" style="width: 100%; height: auto;" <img/>
+  <img src="https://cdn.drop.media/guest/ce9f311e-db07-420e-8def-784adc9df009.jpeg" alt="SafeMe Logo" style="width: 100%; height: auto;" />
   
   <div id="login-screen">
     <h2>Login to SafeMe</h2>
@@ -80,7 +80,6 @@
     <p id="login-error" style="color: red; display: none;">Invalid credentials. Try again.</p>
   </div>
 
-  
   <div class="container">
     <h1>Emergency Safety App</h1>
 
@@ -92,13 +91,11 @@
       <button onclick="showScreen('contactForm')">Contact Form</button>
     </div>
 
-    
     <div id="home" class="screen active">
       <button id="safe-button" onclick="sendAlert()">Safe Me</button>
       <div id="map"></div>
     </div>
 
-    
     <div id="contacts" class="screen">
       <h2>Contacts</h2>
       <form onsubmit="addContact(event)">
@@ -109,13 +106,11 @@
       <ul id="contact-list"></ul>
     </div>
 
-    
     <div id="history" class="screen">
       <h2>Alert History</h2>
       <ul id="alert-log"></ul>
     </div>
 
-    
     <div id="settings" class="screen">
       <h2>Settings</h2>
       <form class="settings-form" onsubmit="updateSettings(event)">
@@ -131,7 +126,6 @@
       <div id="settings-summary"></div>
     </div>
 
-    
     <div id="contactForm" class="screen">
       <h2>Contact Us</h2>
       <form>
@@ -184,6 +178,7 @@
         errorMsg.style.display = "block";
       }
     }
+
     function sendAlert() {
       navigator.geolocation.getCurrentPosition(position => {
         const lat = position.coords.latitude.toFixed(5);
@@ -207,7 +202,7 @@
       const name = document.getElementById("contact-name").value;
       const phone = document.getElementById("contact-phone").value;
       const contactList = document.getElementById("contact-list");
-//main
+
       const contactItem = document.createElement("li");
       contactItem.textContent = `${name} - ${phone}`;
       contactList.appendChild(contactItem);
@@ -225,8 +220,6 @@
       const summary = `✅ Settings saved: ${name ? `Name: ${name}, ` : ""}${phone ? `Phone: ${phone}, ` : ""}Notifications: ${notifications}`;
       document.getElementById("settings-summary").textContent = summary;
     }
-  </script>
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxuxZk_macRUgpXSwjApDZdM2HXMMjYi4&callback=initMap" async defer></script>
 
     function loadGoogleMaps() {
       // This will be loaded from your environment/config
@@ -240,6 +233,7 @@
       document.body.appendChild(script);
     }
   </script>
+  
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxuxZk_macRUgpXSwjApDZdM2HXMMjYi4&callback=initMap" async defer></script>
 </body>
-</main>
 </html>
