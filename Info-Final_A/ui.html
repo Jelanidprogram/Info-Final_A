@@ -138,6 +138,14 @@
   </div>
 
   <script>
+    // Make these functions available globally
+    window.showScreen = showScreen;
+    window.login = login;
+    window.sendAlert = sendAlert;
+    window.addContact = addContact;
+    window.updateSettings = updateSettings;
+    window.initMap = initMap;
+
     function showScreen(screenId) {
       document.querySelectorAll(".screen").forEach(screen => {
         screen.classList.remove("active");
@@ -220,39 +228,20 @@
       const summary = `✅ Settings saved: ${name ? `Name: ${name}, ` : ""}${phone ? `Phone: ${phone}, ` : ""}Notifications: ${notifications}`;
       document.getElementById("settings-summary").textContent = summary;
     }
-<<<<<<< HEAD
   </script>
- <script
- <script type="module">
-  import { GOOGLE_MAPS_API_KEY } from './config.js';
-  
-  function loadGoogleMaps() {
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&callback=initMap`;
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
-  }
-  
-  // Call this when needed (like after login)
-  window.loadGoogleMaps = loadGoogleMaps;
-</script>
-=======
 
+  <script type="module">
+    import { GOOGLE_MAPS_API_KEY } from './config.js';
+    
     function loadGoogleMaps() {
-      // This will be loaded from your environment/config
       const script = document.createElement('script');
-      script.src = '/api/maps-key'; // This endpoint will provide the key securely
-      script.onload = () => {
-        const mapsScript = document.createElement('script');
-        mapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${window.googleMapsKey}&callback=initMap`;
-        document.body.appendChild(mapsScript);
-      };
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&callback=initMap`;
+      script.async = true;
+      script.defer = true;
       document.body.appendChild(script);
     }
->>>>>>> a05b96b4990be11df1a637425fbe8c4a163960d4
+    
+    window.loadGoogleMaps = loadGoogleMaps;
   </script>
-  
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxuxZk_macRUgpXSwjApDZdM2HXMMjYi4&callback=initMap" async defer></script>
 </body>
 </html>
