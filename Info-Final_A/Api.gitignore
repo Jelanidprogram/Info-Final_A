@@ -1,5 +1,0 @@
-# Ignore environment files
-Api_key.env
-
-# Ignore node_modules directory
-node_modules/

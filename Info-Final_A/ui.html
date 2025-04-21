@@ -179,6 +179,7 @@
       if (username === "bob" && password === "bobpass") {
         document.getElementById("login-screen").style.display = "none";
         document.querySelector(".container").style.display = "block";
+        loadGoogleMaps();
       } else {
         errorMsg.style.display = "block";
       }
@@ -206,7 +207,7 @@
       const name = document.getElementById("contact-name").value;
       const phone = document.getElementById("contact-phone").value;
       const contactList = document.getElementById("contact-list");
-
+//main
       const contactItem = document.createElement("li");
       contactItem.textContent = `${name} - ${phone}`;
       contactList.appendChild(contactItem);
@@ -227,4 +228,18 @@
   </script>
  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxuxZk_macRUgpXSwjApDZdM2HXMMjYi4&callback=initMap" async defer></script>
   </body>
+    function loadGoogleMaps() {
+      // This will be loaded from your environment/config
+      const script = document.createElement('script');
+      script.src = '/api/maps-key'; // This endpoint will provide the key securely
+      script.onload = () => {
+        const mapsScript = document.createElement('script');
+        mapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${window.googleMapsKey}&callback=initMap`;
+        document.body.appendChild(mapsScript);
+      };
+      document.body.appendChild(script);
+    }
+  </script>
+</body>
+</main>
 </html>
